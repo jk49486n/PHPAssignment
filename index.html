@@ -1,0 +1,46 @@
+<html>
+	<head>
+		<title>Add Students Form</title>
+
+	</head>
+	<body>
+		<h1>Add students to English Class:</h1>
+		<form method="get">
+			<p>
+				<label for="firstName">First Name:</label>
+				<input type="text" name="firstName" id="firstName">
+			</p>
+			<p>
+				<label for="lastName">Last Name:</label>
+				<input type="text" name="lastName" id="lastName">
+			</p>
+			<p>
+				<label for="studentID">Student ID:</label>
+				<input type="number" name="studentID" id="studentID">
+			</p>
+			<input type="submit" value="Submit" onclick="addtoDB()">
+		</form>
+		<br>
+		<a href="http://localhost:8888/PHPAssignment/select.php">Show Current Students</a>
+			<script>
+				function addtoDB() {
+				  var xhttp; 
+				  xhttp = new XMLHttpRequest();
+				  xhttp.onreadystatechange = function() {
+				    if (xhttp.readyState == 4 && xhttp.status == 200) {
+				        document.getElementById("submitted").innerHTML = "form submitted";
+				    }
+				  };
+				   var firstName = document.getElementById('firstName').value;
+				   var lastName = document.getElementById('lastName').value;
+				   var studentID = document.getElementById('studentID').value;
+
+				   
+				   var queryString = "?firstName=" + firstName + "&lastName=" + lastName + "&studentID=" + studentID;
+				   console.log(queryString);
+				   xhttp.open("GET", "insert.php" + queryString, true);
+				   xhttp.send(null); 
+				}
+			</script>
+ 	</body>
+</html>
